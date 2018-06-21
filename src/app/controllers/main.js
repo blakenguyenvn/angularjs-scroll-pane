@@ -14,9 +14,9 @@
       }]
     );
 
-  MainControllerInit.$inject = ['$scope', '$sce'];
+  MainControllerInit.$inject = ['$scope', '$sce', 'NewsStore', 'NewsActions'];
 
-  function MainControllerInit($scope, $sce, NewsActions){
+  function MainControllerInit($scope, $sce, NewsStore, NewsActions){
 
     $scope.news_store = NewsStore.init({
       api_key: '092b8aac63e3484ea21a5245dfe44acc'
@@ -33,7 +33,7 @@
     /**
      * Scroll Pane Config
      */
-     
+
 
   };
 

@@ -1,8 +1,8 @@
 ;(function(){
 
-  var NyTimesApp = angular.module('NyTimesMainApp');
+  var NyTimesApp = angular.module('MainApp');
   var LOAD_MORE_NEWS = 'LOAD_MORE_NEWS';
-  
+
    /**
    * DISPATCHER CONSTRUCTOR
    */
@@ -40,7 +40,7 @@
           actionType: LOAD_MORE_NEWS,
           item: null
         })
-      } 
+      }
     };
   };
 
@@ -82,7 +82,7 @@
     service.init = function(options){
         this.request.api_key = options.api_key != undefined ? options.api_key : null;
         this.request.nation = options.nation != undefined ? options.nation : 'singapore';
-        
+
         this.loadData(true);
 
         return this;
@@ -94,7 +94,7 @@
 
       //== Check if API Key is wrong
       if (self.request.api_key == null) {
-        
+
         console.error('API key is wrong.');
         return false;
 
@@ -102,9 +102,9 @@
 
         var deferred = $q.defer();
         var self = this;
-        
+
         self.isLoading = true;
-        
+
         $http({
           method : 'GET',
           url: "https://api.nytimes.com/svc/search/v2/articlesearch.json?" + "api-key=" + self.request.api_key + "&q=" + self.request.nation + "&page=" + self.request.page,
@@ -115,18 +115,18 @@
             self.data[self.request.page] = response.data.response.docs;
             console.log(self.data);
             self.currentPage = self.request.page;
-            
+
             deferred.resolve(response);
           }
-          
+
           self.isLoading = false;
-          
+
         }, function errorCallback(response) {
-          
+
           deferred.reject(error);
           self.isLoading = false;
         });
-        
+
         return deferred.promise;
       }
     };
@@ -134,7 +134,5 @@
     return service;
   };
 
-  
+
 })()
-
-

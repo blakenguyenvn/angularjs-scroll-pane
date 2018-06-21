@@ -1,14 +1,14 @@
 (function(){
   'use strict';
-  
-	var NyTimesApp = angular.module('NyTimesMainApp');
-	
+
+	var NyTimesApp = angular.module('MainApp');
+
 	/**
 	 *  Directive: Grid render
 	 */
 	NyTimesApp.directive('newsItemRender', newsItemRenderFunc);
 	newsItemRenderFunc.$inject = ['$window', '$timeout'];
-	
+
 	function newsItemRenderFunc($window, $timeout){
 		return {
 			restrict : 'A',
@@ -28,7 +28,7 @@
 					<p ng-bind="news_item.snippet"></p>
 				</div>
 			</div>
-			
+
 			<!-- Detail Modal -->
 			<div class="modal fade" id="{{modal_id}}" tabindex="-1" role="dialog" aria-labelledby="{{modal_id}}" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -66,13 +66,13 @@
 				scope.thumnail = 'assets/images/default_thumnail.jpg';
 				scope.web_url = scope.news_item.web_url;
 				scope.web_domain = scope.web_url.replace(/^((\w+:)?\/\/[^\/]+\/?).*$/,'$1');
-		
+
 				if (scope.news_item.multimedia[0] != undefined && scope.news_item.multimedia[0] != null) {
 					scope.thumnail = scope.web_domain + '/' + scope.news_item.multimedia[0].url;
 				}
-				
+
 			}
 		}
 	};
-	
+
 })()
