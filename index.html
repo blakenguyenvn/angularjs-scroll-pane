@@ -24,13 +24,20 @@
 
 	<!-- Owl Carousel -->
 	<link rel="stylesheet" href="src/assets/css/owl.carousel.min.css">
-  <link rel="stylesheet" href="src/assets/css/owl.theme.default.min.css">
+  	<link rel="stylesheet" href="src/assets/css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="src/assets/css/style.css">
 
+	<!-- jQuery and relative libraries-->
+	<script src="src/assets/js/jquery.min.js"></script>
+	<script src="node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+
 	<!-- AngularJS  -->
-  <script src="src/assets/js/angular.min.js"></script>
+  	<script src="src/assets/js/angular.min.js"></script>
+	<script src="node_modules/ng-scrollbars/dist/scrollbars.min.js"></script>
+
 
 	<!-- AngularJS APP-->
 	<script src="src/app/app.js"></script>
@@ -49,16 +56,38 @@
 
 	</head>
 	<body ng-controller="MainController">
+		<div class="loader-wrapper ng-hide" ng-show="newsPanel.isLoading">
+			<div class="loader">
+				<div class="loader-inner ball-beat">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+			</div>
+		</div>
+		<div id="page">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm p-3">
+						<div id="newsListPanel" ng-hide="newsPanel.data.length == 0" ng-scrollbars ng-scrollbars-config="newsPanel.scrollbarConfig">
+							<div class="inner-wrapper">
+								<div class="news-page scroll-binding" ng-repeat="newsPage in newsPanel.data track by $index">
+									<div class="news-item card" ng-repeat="newsItem in newsPage track by $index + newsItem._id" data-id="{{ newsItem._id }}">
+										<div class="card-body">
+										    <h5 class="card-title" ng-bind="newsItem.headline.main"></h5>
+										    <h6 class="card-subtitle mb-2 text-muted" ng-bind="newsItem.source"></h6>
+										    <p class="card-text" ng-bind="newsItem.snippet"></p>
+										    <a href="{{ newsItem.web_url }}" target="_blank" class="card-link">Read More</a>
+									  	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-	<div id="page">
-
-	</div>
-
-	<div class="gototop js-top">
-		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
-  </div>
-  <!-- UI Jquery Script -->
-  <script src="src/assets/js/jquery.min.js"></script>
   <!-- jQuery Easing -->
   <script src="src/assets/js/jquery.easing.1.3.js"></script>
   <!-- Bootstrap -->
